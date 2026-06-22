@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        {% for item in items %}
+        <div>
+        <img src="{{ url_for('static', filename=item[3] )}}">
+            <p>Name : {{item[0]}}</p>
+            <p>Quantity : {{item[1]}}</p>
+            <p>Price : {{item[2]}}</p>
+        </div>
+        {% endfor %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        {% for item in items %}
+        <div>
+         <p>Order Id : {{item[0]}}</p>
+         <p>User  Id : {{item[1]}}</p>
+         <p>Total Amount : {{item[2]}}</p>
+         <p>Date : {{item[3]}}</p>
+         <form action="/orderitems" method="GET">
+            <input type="hidden" name="order_id" value="{{item[0]}}">
+            <button type="submit">View Detals</button>
+         </form>
+        </div>
+        {% endfor %}
+        <br>
+        <br>
+    </main>
+</body>
+</html>

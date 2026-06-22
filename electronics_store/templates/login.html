@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+    </header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message  in messages %}
+                {% if category == "Error"%}
+                    <p>❌ {{message}}</p> 
+                {% endif %}
+                {% if category == "Success"%}
+                    <p>✅ {{message}}</p> 
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <main>
+        <form action="/login" method="POST">
+            <label>E-mail</label>
+            <input type="email" name="email" placeholder="E-mail">
+            <br>
+            <br>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password">
+            <br>
+            <br>
+            <button type="submit" name="submit">Login</button>
+        </form>
+            <p>Don't Have An Account ? </p>
+            <a href="/">
+                <button>Create Account</button>
+            </a>
+    </main>
+</body>
+</html>

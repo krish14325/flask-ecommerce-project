@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message  in messages %}
+                {% if category == "Error"%}
+                    <p>❌ {{message}}</p> 
+                {% endif %}
+                {% if category == "Success"%}
+                    <p>✅ {{message}}</p> 
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <main>
+        {% for item in items%}
+        <div>
+        <img src="{{ url_for('static', filename = item[1])}}" alt="{{item[2]}}" style="max-width: 150px;">
+            <p>Product Name : {{item[2]}}</p>
+            <p>Price : {{item[3]}}</p>
+            <div>
+                <form action="/decrease" method="POST">
+                        <input type="hidden" name="product_id" value="{{item[0]}}">
+                        <button type="submit">-</button>
+                </form>
+                Quantity : {{item[4]}}
+                <form action="/increase" method="POST">
+                        <input type="hidden" name="product_id" value="{{item[0]}}">
+                        <button type="submit">+</button>
+                </form>
+            </div>
+            <form method="POST">
+                <input type="hidden" name="id" value="{{item[0]}}">
+                <button type="submit">Remove From Cart</button>
+            </form>
+            <p>Total : {{item[5]}}</p>
+        </div>
+        <br>
+        <br>
+        {% endfor %}
+        <form action = "/place_order" method="POST">
+        <p>Total Bill : {{grand_total}}</p>
+            <input type="hidden" name="total" value="{{grand_total}}">
+         <button type="submit">Place Order</button>
+        </form>
+    </main>
+</body>
+</html>

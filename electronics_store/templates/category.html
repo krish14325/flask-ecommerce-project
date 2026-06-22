@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category_name }}</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>{{ category_name }}</h2>
+
+<main>
+
+{% if products %}
+
+    {% for product in products %}
+
+        <div>
+
+            <a href="/product/{{ product[0] }}">
+                <img src="{{ url_for('static',
+                    filename=product[5]) }}"
+                    width="200">
+            </a>
+
+            <h3>{{ product[1] }}</h3>
+
+            <p>₹ {{ product[3] }}</p>
+
+            <a href="/product/{{ product[0] }}">
+                View Details
+            </a>
+
+        </div>
+
+        <br>
+
+    {% endfor %}
+
+{% else %}
+
+    <h2>No Products Found</h2>
+
+{% endif %}
+
+</main>
+
+</body>
+</html>

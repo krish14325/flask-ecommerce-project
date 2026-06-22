@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    {% for category,message in messages %}
+        <p>{{message}}</p>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+<main>
+
+{% if products %}
+
+    {% for product in products %}
+
+        <div>
+
+            <a href="/product/{{product[0]}}">
+                <img src="{{ url_for('static', filename=product[5]) }}"
+                     width="200">
+            </a>
+
+            <br><br>
+
+            <p>{{product[1]}}</p>
+            <p>{{product[3]}}</p>
+
+            <a href="/product/{{product[0]}}">
+                View Details
+            </a>
+
+        </div>
+
+        <br><br>
+
+    {% endfor %}
+
+{% else %}
+
+    <h2>No Products Found</h2>
+
+{% endif %}
+
+</main>
+
+</body>
+</html>
